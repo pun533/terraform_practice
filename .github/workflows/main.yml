@@ -1,0 +1,33 @@
+name: Terraform Deploy
+
+on:
+  push:
+    branches:
+      - main   # ya jis branch pe tum deploy karna chahte ho
+  
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.6.6  # apni version ke according update karo
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      run: terraform plan
+
+    # 👇 Apply ko optional rakho ya approval ke saath use karo
+    - name: Terraform Apply
+      run: terraform apply -auto-approve

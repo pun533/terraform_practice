@@ -37,14 +37,16 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Terraform Init
+      id: tf_init
       run: terraform init
 
     - name: Terraform Validate
+      id: tf_Validate
       run: terraform validate
 
     - name: Terraform Plan
+      id: tf_plan
       run: terraform plan
-
-    # 👇 Apply ko optional rakho ya approval ke saath use karo
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
+    
+    # - name: Terraform Apply
+    #   run: terraform apply -auto-approve

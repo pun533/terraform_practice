@@ -57,10 +57,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Login to Azure
-      uses: azure/login@v1
+    - name: Setup Terraform CLI
+      uses: hashicorp/setup-terraform@v2.0.3
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        terraform_version: latest
 
     - name: Terraform Init
       id: tf_init

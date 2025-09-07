@@ -18,21 +18,19 @@ jobs:
       run: sudo apt-get update -y
 
     - name: Install unzip
-      run: sudo apt-get update && sudo apt-get install -y unzip
-
+      run: sudo apt-get install -y unzip
 
     - name: Setup Terraform CLI
       uses: hashicorp/setup-terraform@v2.0.3
       with:
         terraform_version: latest
 
-    # - name: Install Terraform
-    #   run: sudo apt-get install -y terraform    
+    - name: Install curl
+      run: sudo apt-get install -y curl
 
-    # - name: Setup Terraform
-    #   uses: hashicorp/setup-terraform@v3
-    #   with:
-    #     terraform_version: 1.6.6  # apni version ke according update karo
+    - name: Install Azure CLI
+      run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+   
     - name: Login to Azure
       uses: azure/login@v1
       with:

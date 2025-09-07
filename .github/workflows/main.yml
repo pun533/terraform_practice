@@ -6,8 +6,8 @@ on:
       - main   # ya jis branch pe tum deploy karna chahte ho
   
 jobs:
-  terraform:
-    name: 'Terraform'
+  terraform_Plan:
+    name: 'Terraform_plan'
     runs-on: Chomu
 
     steps:
@@ -47,6 +47,19 @@ jobs:
     - name: Terraform Plan
       id: tf_plan
       run: terraform plan
+
+  terraform_Apply:
+    name: 'Terraform_Apply'
+    runs-on: Chomu
+    needs: terraform_Plan
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Terraform Init
+      id: tf_init
+      run: terraform init
     
-    # - name: Terraform Apply
-    #   run: terraform apply -auto-approve
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
